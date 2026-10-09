@@ -1,0 +1,43 @@
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/app/__pycache__/
+backend/.pytest_cache/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+*.pyc
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Node dependencies and build outputs
+node_modules/
+dist/
+build/
+coverage/
+
+# Logs
+*.log
