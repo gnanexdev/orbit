@@ -8,7 +8,6 @@ import {
   Eye,
   FileDown
 } from 'lucide-react';
-import  from '../ui/';
 
 export const ArtifactCard = ({
   artifact,

@@ -1,4 +1,3 @@
-import  from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -11,10 +10,7 @@ import {
   Layers,
   CheckCircle2,
   Shield,
-  Play,
   Terminal,
-  Globe,
-  Database
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { OrbitLogo } from '../components/branding/OrbitLogo';

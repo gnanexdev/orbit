@@ -3,15 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   FolderKanban,
-  Clock,
-  Plus,
-  Layers,
-  FileText,
-  Calendar,
-  Sparkles,
-  ArrowRight
+  Plus
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { Progress } from '../components/ui/Progress';
 import { Button } from '../components/ui/Button';
 import { TaskList } from '../components/tasks/TaskList';
@@ -35,8 +29,6 @@ export const ProjectDetail = () => {
 
   const completedTasks = projectTasks.filter(t => t.status === 'completed');
   const activeTasks = projectTasks.filter(t => t.status === 'running' || t.status === 'needs_approval');
-  const upcomingTasks = projectTasks.filter(t => t.status === 'pending' || t.status === 'paused');
-
   return (
     <div className="flex flex-col gap-6 pb-12">
       {/* Top back button */}

@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FolderKanban, ArrowRight} from 'lucide-react';
 import { Progress } from '../ui/Progress';
-import  from '../ui/';
 
 export const ProjectCard = ({ project }) => {
   const navigate = useNavigate();

@@ -11,7 +11,7 @@ import {
   FolderKanban,
   Wrench
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { TaskList } from '../components/tasks/TaskList';
 import { Button } from '../components/ui/Button';
 import { OrbitMark } from '../components/branding/OrbitMark';

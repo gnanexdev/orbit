@@ -13,21 +13,13 @@ export const Button = ({
   type = 'button',
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all select-none focus:outline-none';
+  const baseStyles = 'inline-flex min-h-9 items-center justify-center font-medium leading-tight rounded-md transition-all select-none focus:outline-none';
 
   const sizeStyles = {
     sm: 'text-xs px-2.5 py-1.5 gap-1.5',
     md: 'text-sm px-3.5 py-2 gap-2',
     lg: 'text-base px-5 py-2.5 gap-2.5 font-semibold',
     icon: 'p-2 rounded-md',
-  };
-
-  const variantStyles = {
-    primary: 'bg-cyan-500 text-slate-950 hover:bg-cyan-400 font-semibold border border-cyan-400/30 active:translate-y-0.5',
-    secondary: 'bg-surface-elevated text-slate-200 border border-slate-700/50 hover:bg-surface-hover hover:border-slate-600 active:bg-surface-active',
-    ghost: 'bg-transparent text-slate-400 hover:text-slate-100 hover:bg-surface-hover border border-transparent',
-    danger: 'bg-rose-500/10 text-rose-400 border border-rose-500/30 hover:bg-rose-500/20 hover:border-rose-500/50',
-    outline: 'bg-transparent text-slate-300 border border-slate-700 hover:bg-surface-hover hover:border-slate-500',
   };
 
   // Specific inline overrides matching CSS variables
@@ -80,6 +72,7 @@ export const Button = ({
       className={computedClass}
       style={getStyle()}
       disabled={disabled || isLoading}
+      aria-busy={isLoading || undefined}
       onClick={onClick}
       {...props}
     >

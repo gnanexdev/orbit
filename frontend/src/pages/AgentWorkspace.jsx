@@ -1,37 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-  ArrowLeft,
-  Send,
-  Sparkles,
-  Clock,
-  Zap,
-  Play,
-  Pause,
-  Square,
-  FastForward,
-  Layers,
-  FileText,
-  ShieldCheck,
-  CheckCircle2,
-  AlertCircle,
-  ExternalLink,
-  ChevronRight,
-  Code2,
-  Search,
-  BarChart3,
-  Cpu,
-  Download,
-  Share2
-} from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { ArrowLeft, Send, FileText } from 'lucide-react';
+import { useApp } from '../context/useApp';
 import { AgentPlan } from '../components/agent/AgentPlan';
 import { AgentStatus } from '../components/agent/AgentStatus';
 import { AgentMessage } from '../components/agent/AgentMessage';
 import { ApprovalCard } from '../components/agent/ApprovalCard';
 import { ArtifactCard } from '../components/artifacts/ArtifactCard';
 import { ArtifactPreview } from '../components/artifacts/ArtifactPreview';
-import  from '../components/ui/';
 import { Button } from '../components/ui/Button';
 import { OrbitMark } from '../components/branding/OrbitMark';
 import { getTask, toWorkspaceTask } from '../services/api';
@@ -54,35 +30,33 @@ export const AgentWorkspace = () => {
   const [activeRightTab, setActiveRightTab] = useState('plan'); // 'plan' or 'artifacts'
   const [activeZone, setActiveZone] = useState('activity');
   const [previewArtifact, setPreviewArtifact] = useState(null);
-  const [remoteTask, setRemoteTask] = useState(null);
-  const [isLoadingTask, setIsLoadingTask] = useState(true);
-  const [loadError, setLoadError] = useState('');
+  const [remoteTaskState, setRemoteTaskState] = useState(null);
+  const [settledTaskId, setSettledTaskId] = useState(null);
+  const [loadErrorState, setLoadErrorState] = useState(null);
   const messagesEndRef = useRef(null);
   const messagesScrollRef = useRef(null);
 
   const localTask = tasks.find((item) => item.id === id);
+  const remoteTask = remoteTaskState?.id === id ? remoteTaskState.task : null;
+  const isLoadingTask = !localTask && settledTaskId !== id;
+  const loadError = loadErrorState?.id === id ? loadErrorState.message : '';
   const task = localTask || remoteTask;
 
   useEffect(() => {
-    if (localTask) {
-      setRemoteTask(null);
-      setIsLoadingTask(false);
-      setLoadError('');
-      return undefined;
-    }
+    if (localTask) return undefined;
 
     let isCurrent = true;
-    setIsLoadingTask(true);
-    setLoadError('');
     getTask(id)
       .then((response) => {
-        if (isCurrent) setRemoteTask(toWorkspaceTask(response));
+        if (isCurrent) setRemoteTaskState({ id, task: toWorkspaceTask(response) });
       })
       .catch((error) => {
-        if (isCurrent) setLoadError(error.message || 'Unable to load this task.');
+        if (isCurrent) {
+          setLoadErrorState({ id, message: error.message || 'Unable to load this task.' });
+        }
       })
       .finally(() => {
-        if (isCurrent) setIsLoadingTask(false);
+        if (isCurrent) setSettledTaskId(id);
       });
 
     return () => { isCurrent = false; };

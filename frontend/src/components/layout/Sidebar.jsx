@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   Home,
@@ -7,13 +6,12 @@ import {
   Brain,
   Wrench,
   Settings,
-  HelpCircle,
   Plus,
   ChevronLeft,
   ChevronRight,
   Sparkles
 } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 import { OrbitLogo } from '../branding/OrbitLogo';
 
 export const Sidebar = () => {
@@ -21,12 +19,16 @@ export const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navItems = [
-    { label: 'Home', path: '/app', icon: Home, exact: true },
-    { label: 'Tasks', path: '/app/tasks', icon: CheckSquare },
-    { label: 'Projects', path: '/app/projects', icon: FolderKanban },
-    { label: 'Memory', path: '/app/memory', icon: Brain },
-    { label: 'Tools', path: '/app/tools', icon: Wrench },
+  const navSections = [
+    { label: 'Workspace', items: [
+      { label: 'Home', path: '/app', icon: Home, exact: true },
+      { label: 'Tasks', path: '/app/tasks', icon: CheckSquare },
+      { label: 'Projects', path: '/app/projects', icon: FolderKanban },
+    ] },
+    { label: 'Resources', items: [
+      { label: 'Memory', path: '/app/memory', icon: Brain },
+      { label: 'Tools', path: '/app/tools', icon: Wrench },
+    ] },
   ];
 
   const isActive = (path, exact) => {
@@ -56,6 +58,7 @@ export const Sidebar = () => {
         <button
           onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           className="p-1 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors shrink-0"
+          aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           title={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {isSidebarCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -80,36 +83,34 @@ export const Sidebar = () => {
 
       {/* Main Navigation */}
       <nav className="flex-1 px-3 py-2 flex flex-col gap-1 overflow-y-auto">
-        {!isSidebarCollapsed && (
-          <span className="px-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
-            Workspace
-          </span>
-        )}
-        {navItems.map((item) => {
-          const active = isActive(item.path, item.exact);
-          const Icon = item.icon;
-          return (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${active ? 'font-semibold' : 'hover:bg-slate-800/60 text-slate-400 hover:text-slate-200'}`}
-              style={{
-                backgroundColor: active ? 'rgba(56, 189, 248, 0.12)' : 'transparent',
-                color: active ? '#38bdf8' : undefined,
-                border: active ? '1px solid rgba(56, 189, 248, 0.25)' : '1px solid transparent',
-              }}
-              title={isSidebarCollapsed ? item.label : undefined}
-            >
-              <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-cyan-400' : 'text-slate-400'}`} />
-              {!isSidebarCollapsed && <span>{item.label}</span>}
-              {!isSidebarCollapsed && item.label === 'Tasks' && (
-                <span className="ml-auto text-[11px] px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 font-mono">
-                  6
-                </span>
-              )}
-            </NavLink>
-          );
-        })}
+        {navSections.map((section) => (
+          <div className="app-sidebar__section" key={section.label}>
+            {!isSidebarCollapsed && <span className="app-sidebar__section-label">{section.label}</span>}
+            {section.items.map((item) => {
+              const active = isActive(item.path, item.exact);
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${active ? 'font-semibold' : 'hover:bg-slate-800/60 text-slate-400 hover:text-slate-200'}`}
+                  style={{
+                    backgroundColor: active ? 'var(--accent-wash)' : 'transparent',
+                    color: active ? 'var(--brand-cyan)' : undefined,
+                    border: active ? '1px solid var(--border-highlight)' : '1px solid transparent',
+                  }}
+                  title={isSidebarCollapsed ? item.label : undefined}
+                >
+                  <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-cyan-400' : 'text-slate-400'}`} />
+                  {!isSidebarCollapsed && <span>{item.label}</span>}
+                  {!isSidebarCollapsed && item.label === 'Tasks' && (
+                    <span className="ml-auto text-[11px] px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 font-mono">6</span>
+                  )}
+                </NavLink>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
       {/* Agent Workflow Badge (when expanded) */}

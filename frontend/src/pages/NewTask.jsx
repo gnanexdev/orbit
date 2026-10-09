@@ -15,7 +15,7 @@ import {
   ShieldCheck,
   Zap,
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { Button } from '../components/ui/Button';
 import { Toggle } from '../components/ui/Toggle';
 import { OrbitMark } from '../components/branding/OrbitMark';

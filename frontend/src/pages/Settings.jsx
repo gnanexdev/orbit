@@ -5,10 +5,9 @@ import {
   Brain,
   Bell,
   Palette,
-  ShieldCheck,
   CheckCircle2
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { Toggle } from '../components/ui/Toggle';
 import { Button } from '../components/ui/Button';
 

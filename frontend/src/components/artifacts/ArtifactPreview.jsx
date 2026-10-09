@@ -4,10 +4,7 @@ import {
   Download,
   Copy,
   Check,
-  FileText,
-  FileCode2,
-  Table,
-  FileDown
+  FileText
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 

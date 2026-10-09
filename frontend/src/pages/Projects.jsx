@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Plus, } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { Plus } from 'lucide-react';
+import { useApp } from '../context/useApp';
 import { ProjectCard } from '../components/projects/ProjectCard';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
@@ -10,7 +9,6 @@ import { Textarea } from '../components/ui/Textarea';
 
 export const Projects = () => {
   const { projects } = useApp();
-  const navigate = useNavigate();
 
   const [showNewModal, setShowNewModal] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');

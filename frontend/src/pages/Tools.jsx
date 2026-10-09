@@ -8,11 +8,9 @@ import {
   Database,
   Zap,
   Layers,
-  Settings2,
-  CheckCircle2,
-  ShieldCheck
+  Settings2
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { Toggle } from '../components/ui/Toggle';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';

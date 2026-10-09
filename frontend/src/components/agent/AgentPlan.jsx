@@ -5,7 +5,6 @@ const statusLabels = {
   running: 'In progress',
   completed: 'Complete',
   active: 'In progress',
-  pending: 'Queued',
   needs_approval: 'Approval',
   blocked: 'Blocked',
   failed: 'Failed',

@@ -5,15 +5,13 @@ import {
   Search,
   Trash2,
   Edit2,
-  Tag,
   Clock,
   Check,
   X
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { Button } from '../components/ui/Button';
 import { Modal } from '../components/ui/Modal';
-import  from '../components/ui/';
 import { Textarea } from '../components/ui/Textarea';
 import { Badge } from '../components/ui/Badge';
 
@@ -28,7 +26,7 @@ export const Memory = () => {
   // New Memory form state
   const [newContent, setNewContent] = useState('');
   const [newCategory, setNewCategory] = useState('Goals');
-  const [newImportance, setNewImportance] = useState('High');
+  const newImportance = 'High';
 
   const categories = [
     'All',

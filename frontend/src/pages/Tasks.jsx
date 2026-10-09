@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { TaskFilters } from '../components/tasks/TaskFilters';
 import { TaskList } from '../components/tasks/TaskList';
 import { Button } from '../components/ui/Button';

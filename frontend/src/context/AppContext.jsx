@@ -1,4 +1,5 @@
-import { createContext, useContext, useState} from 'react';
+import { useState } from 'react';
+import { AppContext } from './appContext';
 import {
   currentUser as initialUser,
   mockTasks as initialTasks,
@@ -9,12 +10,10 @@ import {
 } from '../data/mockData';
 import { createTask as createBackendTask, toTaskRequest, toWorkspaceTask } from '../services/api';
 
-const AppContext = createContext();
-
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(initialUser);
   const [tasks, setTasks] = useState(initialTasks);
-  const [projects, setProjects] = useState(initialProjects);
+  const [projects] = useState(initialProjects);
   const [memories, setMemories] = useState(initialMemories);
   const [tools, setTools] = useState(initialTools);
   const [artifacts, setArtifacts] = useState(initialArtifacts);
@@ -23,7 +22,7 @@ export const AppProvider = ({ children }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [notifications, setNotifications] = useState([
+  const [notifications] = useState([
     { id: 'notif-1', title: 'Task Completed', message: 'Dataset Analysis report generated.', time: '2h ago', unread: true },
     { id: 'notif-2', title: 'Approval Required', message: 'Task #2 needs authorization for DB migration.', time: '45m ago', unread: true },
   ]);
@@ -291,12 +290,4 @@ export const AppProvider = ({ children }) => {
       {children}
     </AppContext.Provider>
   );
-};
-
-export const useApp = () => {
-  const context = useContext(AppContext);
-  if (!context) {
-    throw new Error('useApp must be used within an AppProvider');
-  }
-  return context;
 };

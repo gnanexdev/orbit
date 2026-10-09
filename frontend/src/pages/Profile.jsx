@@ -1,18 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Mail,
-  Shield,
   Key,
-  Layers,
   LogOut,
-  Zap,
-  Clock,
-  CheckCircle2,
-  ExternalLink,
-  Bot
+  CheckCircle2
 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 

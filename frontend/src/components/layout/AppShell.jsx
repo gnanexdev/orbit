@@ -18,9 +18,14 @@ export const AppShell = () => {
         <Topbar />
 
         {/* Dynamic Route Content */}
-        <main className="app-content flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-6 lg:p-8">
-          <div className="max-w-7xl mx-auto w-full">
+        <main className="app-content flex-1 min-h-0 overflow-y-auto overflow-x-hidden p-4 md:p-6 lg:p-8">
+          <div className="app-content-inner max-w-7xl mx-auto w-full">
             <Outlet />
+            <footer className="app-footer">
+              <span>ORBIT Workspace</span>
+              <span className="app-footer__status"><span /> All systems operational</span>
+              <span className="app-footer__version">Private workspace</span>
+            </footer>
           </div>
         </main>
       </div>

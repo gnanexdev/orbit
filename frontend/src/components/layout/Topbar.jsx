@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Bell,
-  Search,
-  Sparkles,
-  Command,
   Plus,
   Menu,
   X,
-  ExternalLink,
-  Clock,
   LogOut
 } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 import { OrbitMark } from '../branding/OrbitMark';
 
 export const Topbar = () => {
@@ -50,17 +45,19 @@ export const Topbar = () => {
         <button
           onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
           className="md:hidden p-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800"
+          aria-label={isMobileNavOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={isMobileNavOpen}
         >
           {isMobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 min-w-0">
           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-400 font-semibold">
             <OrbitMark size={14} />
-            <span>ORBIT / OS</span>
+            <span className="hidden sm:inline">ORBIT / OS</span>
           </div>
           <span className="text-slate-600 hidden sm:inline">/</span>
-          <h1 className="text-sm font-semibold text-slate-200 hidden sm:inline truncate max-w-xs font-heading">
+          <h1 className="text-xs sm:text-sm font-semibold text-slate-200 truncate max-w-[34vw] sm:max-w-xs font-heading">
             {getPageTitle()}
           </h1>
         </div>
@@ -91,6 +88,8 @@ export const Topbar = () => {
             onClick={() => setShowNotifications(!showNotifications)}
             className="p-2 rounded-md text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 transition-colors relative"
             title="Notifications"
+            aria-label="Notifications"
+            aria-expanded={showNotifications}
           >
             <Bell className="w-4 h-4" />
             {notifications.some(n => n.unread) && (
@@ -127,6 +126,8 @@ export const Topbar = () => {
           <button
             onClick={() => setShowUserMenu(!showUserMenu)}
             className="flex items-center gap-2 p-1 rounded-full hover:ring-2 hover:ring-cyan-500/30 transition-all"
+            aria-label="Open account menu"
+            aria-expanded={showUserMenu}
           >
             <img
               src={user.avatar}

@@ -5,7 +5,6 @@ import { OrbitMark } from '../branding/OrbitMark';
 export const AgentMessage = ({ message }) => {
   const isUser = message.sender === 'user';
   const isTool = message.sender === 'tool';
-  const isAgent = message.sender === 'agent';
 
   if (isTool) {
     return (

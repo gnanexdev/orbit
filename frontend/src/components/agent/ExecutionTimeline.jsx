@@ -1,5 +1,3 @@
-import  from 'lucide-react';
-
 export const ExecutionTimeline = ({ events = [], className = '' }) => {
   if (!events || events.length === 0) return null;
 
